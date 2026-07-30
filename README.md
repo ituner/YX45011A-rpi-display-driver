@@ -2,7 +2,7 @@
 
 This repository installs the known-good Raspberry Pi 5 configuration for the
 YX45011A/YX45011ACT2 bar display: the 60 Hz ST7701 driver, its exact panel
-initialisation sequence, and the Pi 5 CAM/DISP 0 Device Tree overlay.
+initialisation sequence, and the Pi 5 CAM/DISP 1 Device Tree overlay.
 
 ## What you need
 
@@ -15,20 +15,20 @@ initialisation sequence, and the Pi 5 CAM/DISP 0 Device Tree overlay.
 
 ## Physical connection
 
-Use Raspberry Pi 5 combined **MIPI CSI/DSI 22-pin connector CAM/DISP 0**. The Pi 5 ports are mini 22-pin, 0.5 mm pitch, 11.5 mm wide;
+Use Raspberry Pi 5 combined **MIPI CSI/DSI 22-pin connector CAM/DISP 1**. The Pi 5 ports are mini 22-pin, 0.5 mm pitch, 11.5 mm wide;
 they are not the older 15-pin DSI connector. The supplied adapter schematic
 labels its input as `CN2`, a **0.5 mm 22p FPC, top contact**, and carries two
 data lanes plus clock and DSI control lines. It is the working adapter-board
 reference for this project.
 
 1. Shut down and unplug the Pi.
-2. Open **only the Pi 5 `CAM/DISP 0` (DSI0) latch** and the adapter's CN2 latch. Do not use `CAM/DISP 1` with this configuration.
+2. Open **only the Pi 5 `CAM/DISP 1` (DSI1) latch** and the adapter's CN2 latch. Do not use `CAM/DISP 0` with this configuration.
 3. Insert the FFC with the contact side and cable direction required by both
    latches; close both latches without force.
 4. Power the Pi using an appropriate USB-C supply, then boot it.
 
-The installed overlay targets the RP1 DSI0 host, which is CAM/DISP 0. Do not
-move the display to CAM/DISP 1 without a matching overlay.
+The installed overlay targets the RP1 DSI1 host, which is CAM/DISP 1. Do not
+move the display to CAM/DISP 0 without a matching overlay.
 
 ## Quick install
 
@@ -53,7 +53,7 @@ disabled:
 sudo ./scripts/configure.sh
 ```
 
-The installed overlay selects CAM/DISP 0 and binds `yousee,yx45011act2` to the
+The installed overlay selects CAM/DISP 1 and binds `yousee,yx45011act2` to the
 bundled driver. It uses two DSI lanes and the verified 400x960 DRM mode.
 
 After boot, inspect the service:

@@ -12,4 +12,4 @@ if (($#)); then
 fi
 
 systemctl enable yx45011a-display.service
-echo "YX45011A is configured for CAM/DISP 0. Reboot required."
+echo "YX45011A is configured for CAM/DISP 1. Reboot required."

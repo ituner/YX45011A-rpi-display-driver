@@ -58,4 +58,4 @@ install -m 0755 "${repo_dir}/scripts/uninstall.sh" /usr/local/sbin/yx45011a-unin
 install -m 0644 "${repo_dir}/systemd/yx45011a-display.service" /etc/systemd/system/yx45011a-display.service
 systemctl daemon-reload
 systemctl enable yx45011a-display.service
-echo "Installed the known-good 400x960 YX45011ACT2 driver for CAM/DISP 0. Reboot required."
+echo "Installed the known-good 400x960 YX45011ACT2 driver for CAM/DISP 1. Reboot required."
