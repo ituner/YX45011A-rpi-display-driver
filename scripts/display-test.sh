@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run the installed YX45011A KMS test pattern without leaving the boot service stopped.
+# Run the installed YX45011A display application in verification mode.
 set -Eeuo pipefail
 
 [[ ${EUID} -eq 0 ]] || {
@@ -13,9 +13,9 @@ duration=${1:-15}
   exit 1
 }
 
-test_app=/usr/local/lib/yx45011a-display/test_pattern.py
-[[ -x ${test_app} ]] || {
-  echo "Test pattern is not installed. Run the YX45011A installer first." >&2
+display_app=/usr/local/lib/yx45011a-display/display_app.py
+[[ -x ${display_app} ]] || {
+  echo "Display application is not installed. Run the YX45011A installer first." >&2
   exit 1
 }
 
@@ -35,7 +35,7 @@ trap restore_service EXIT
 systemctl stop yx45011a-display.service
 echo "Showing YX45011A test pattern for ${duration} seconds (Ctrl+C exits early)."
 set +e
-timeout --foreground --signal=INT "${duration}s" "${test_app}"
+DISPLAY_MODE=verification timeout --foreground --signal=INT "${duration}s" "${display_app}"
 status=$?
 set -e
 
