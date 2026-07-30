@@ -23,7 +23,7 @@ not a Raspberry Pi 5, so the schematic alone does not prove that every
 22-way cable preserves the required pin mapping.
 
 1. Shut down and unplug the Pi.
-2. Open the selected Pi 5 `CAM/DISP` latch and the adapter's CN2 latch.
+2. Open **only the Pi 5 `CAM/DISP 0` (DSI0) latch** and the adapter's CN2 latch. Do not use `CAM/DISP 1` with this configuration.
 3. Insert the FFC with the contact side and cable direction required by both
    latches; close both latches without force.
 4. Power the Pi using an appropriate USB-C supply, then boot it.
