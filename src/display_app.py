@@ -18,6 +18,8 @@ def setting(name, default):
 
 WIDTH = setting("FRAMEBUFFER_WIDTH", "400")
 HEIGHT = setting("FRAMEBUFFER_HEIGHT", "960")
+ACTIVE_WIDTH = setting("ACTIVE_WIDTH", "960")
+ACTIVE_HEIGHT = setting("ACTIVE_HEIGHT", "400")
 ROTATION = setting("ROTATION", "90") % 360
 TITLE = os.environ.get("TITLE", "YX45011A display service")
 RUNNING = True
@@ -62,10 +64,10 @@ def main():
     os.environ["SDL_DRM_DEVICE"] = drm_device
     pygame.init()
     output = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    logical = pygame.Surface((WIDTH, HEIGHT))
-    font = pygame.font.Font(None, max(24, WIDTH // 15))
+    logical = pygame.Surface((ACTIVE_WIDTH, ACTIVE_HEIGHT))
+    font = pygame.font.Font(None, max(24, ACTIVE_HEIGHT // 7))
     print(
-        f"YX45011A logical framebuffer: {WIDTH}x{HEIGHT}; "
+        f"YX45011A framebuffer: {WIDTH}x{HEIGHT}; active scan: {ACTIVE_WIDTH}x{ACTIVE_HEIGHT}; "
         f"active DRM output: {output.get_width()}x{output.get_height()}; "
         f"device: {drm_device}; rotation: {ROTATION}",
         flush=True,
@@ -76,13 +78,15 @@ def main():
                 return
         logical.fill((12, 18, 30))
         lines = (TITLE, "Logical framebuffer", f"{WIDTH} x {HEIGHT}", time.strftime("%Y-%m-%d %H:%M:%S"))
-        y = HEIGHT // 6
+        y = ACTIVE_HEIGHT // 6
         for line in lines:
             text = font.render(line, True, (225, 238, 255))
-            logical.blit(text, ((WIDTH - text.get_width()) // 2, y))
-            y += text.get_height() + HEIGHT // 24
-        frame = pygame.transform.rotate(logical, ROTATION)
-        blit_letterboxed(output, frame)
+            logical.blit(text, ((ACTIVE_WIDTH - text.get_width()) // 2, y))
+            y += text.get_height() + ACTIVE_HEIGHT // 24
+        frame = pygame.transform.rotate(logical, -ROTATION)
+        if frame.get_size() != output.get_size():
+            raise SystemExit(f"DRM output is {output.get_size()}, expected {frame.get_size()}")
+        output.blit(frame, (0, 0))
         pygame.display.flip()
         time.sleep(0.1)
     pygame.quit()
