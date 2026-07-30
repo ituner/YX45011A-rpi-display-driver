@@ -1,0 +1,21 @@
+[Unit]
+Description=YX45011A 400x960 display framebuffer service
+After=multi-user.target
+Wants=systemd-udev-settle.service
+After=systemd-udev-settle.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/yx45011a-display.conf
+Environment=SDL_VIDEODRIVER=kmsdrm
+Environment=SDL_AUDIODRIVER=dummy
+ExecStart=/usr/bin/python3 /usr/local/lib/yx45011a-display/display_app.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
