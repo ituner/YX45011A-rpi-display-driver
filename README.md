@@ -82,18 +82,6 @@ the final 80 rows are hidden on this glass. The service draws a 960x400 active
 image, rotates it into the exact 400x960 DRM framebuffer, and rejects an
 unexpected output size instead of scaling or letterboxing.
 
-## Troubleshooting
-
-* **No `/dev/dri/card*` or no panel connector:** confirm CAM/DISP 0, cable
-  orientation, and reboot. Check `dmesg | grep -iE 'dsi|drm|st7701|yx45011'`.
-* **Service repeatedly restarts:** read the journal command above. On a desktop
-  image, stop other software that has exclusively claimed the same DRM output.
-* **Blank or corrupt panel after a kernel update:** rerun `sudo ./scripts/install.sh`
-  to rebuild the bundled module for the new kernel, then reboot.
-* **Wrong orientation:** set `ROTATION=90`, `180`, or `270` in the configuration
-  file, then restart the service. The default is `90` for a portrait 400x960
-  logical framebuffer.
-
 ## Uninstall
 
 ```sh
