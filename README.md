@@ -18,9 +18,8 @@ initialisation sequence, and the Pi 5 CAM/DISP 0 Device Tree overlay.
 Use Raspberry Pi 5 combined **MIPI CSI/DSI 22-pin connector CAM/DISP 0**. The Pi 5 ports are mini 22-pin, 0.5 mm pitch, 11.5 mm wide;
 they are not the older 15-pin DSI connector. The supplied adapter schematic
 labels its input as `CN2`, a **0.5 mm 22p FPC, top contact**, and carries two
-data lanes plus clock and DSI control lines. Its drawn host is a Luckfox board,
-not a Raspberry Pi 5, so the schematic alone does not prove that every
-22-way cable preserves the required pin mapping.
+data lanes plus clock and DSI control lines. It is the working adapter-board
+reference for this project.
 
 1. Shut down and unplug the Pi.
 2. Open **only the Pi 5 `CAM/DISP 0` (DSI0) latch** and the adapter's CN2 latch. Do not use `CAM/DISP 1` with this configuration.
