@@ -48,6 +48,8 @@ awk '/^# BEGIN YX45011A DISPLAY$/ {skip=1; next} /^# END YX45011A DISPLAY$/ {ski
 } >"${config_txt}"
 
 install -m 0755 "${repo_dir}/src/display_app.py" /usr/local/lib/yx45011a-display/display_app.py
+install -m 0755 "${repo_dir}/src/test_pattern.py" /usr/local/lib/yx45011a-display/test_pattern.py
+install -m 0755 "${repo_dir}/scripts/display-test.sh" /usr/local/bin/yx45011a-display-test
 install -m 0755 "${repo_dir}/scripts/configure.sh" /usr/local/sbin/yx45011a-configure
 install -m 0755 "${repo_dir}/scripts/uninstall.sh" /usr/local/sbin/yx45011a-uninstall
 [[ -e /etc/yx45011a-display.conf ]] || install -m 0644 "${repo_dir}/systemd/yx45011a-display.conf" /etc/yx45011a-display.conf

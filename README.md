@@ -70,6 +70,25 @@ To change only the displayed text or logical framebuffer parameters, edit
 sudo systemctl restart yx45011a-display.service
 ```
 
+## Display test pattern
+
+After reboot, run this one command to show full-screen color bars, a white
+border around the 960x320 visible area, and a `400 x 960 DRM` resolution label:
+
+```sh
+sudo yx45011a-display-test
+```
+
+The pattern ends after 15 seconds, or press `Ctrl+C` to end it sooner. The
+command temporarily stops the normal boot service and restores it automatically
+if it was running before the test. To use another timeout, pass seconds, for
+example `sudo yx45011a-display-test 30`. If you had stopped the service before
+testing, return to normal operation with:
+
+```sh
+sudo systemctl start yx45011a-display.service
+```
+
 ## Framebuffer: 400x960
 
 The kernel driver creates a **400x960 DRM framebuffer**
