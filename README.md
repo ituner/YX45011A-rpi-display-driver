@@ -79,11 +79,12 @@ border around the 960x320 visible area, and a `400 x 960 DRM` resolution label:
 sudo yx45011a-display-test
 ```
 
-The command runs the same installed display application that the boot service
-uses, in its verification view; there is no separate test app. The pattern ends
-after 15 seconds, or press `Ctrl+C` to end it sooner. The command temporarily
-stops the normal boot service and restores it automatically if it was running
-before the test. To use another timeout, pass seconds, for example
+The command invokes `/usr/local/lib/yx45011a-display/display_app.py`, the same
+installed display app used by the boot service, in its verification view; it
+does not install or invoke a second app. The pattern ends after 15 seconds, or
+press `Ctrl+C` to end it sooner. The command temporarily stops the normal boot
+service and restores it automatically if it was running before the test. To use
+another timeout, pass seconds, for example
 `sudo yx45011a-display-test 30`. If you had stopped the service before testing,
 return to normal operation with:
 
